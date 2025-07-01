@@ -40,8 +40,8 @@ export default defineConfig({
 
       // --- Configuración del Manifiesto de la Aplicación ---
       manifest: {
-        name: "Tu Nombre de Aplicación Completo", // Nombre completo de tu PWA
-        short_name: "TuApp", // Nombre corto para la pantalla de inicio
+        name: "Super-quads", // Nombre completo de tu PWA
+        short_name: "SQ", // Nombre corto para la pantalla de inicio
         description: "Una breve descripción de tu increíble PWA.", // Descripción de tu aplicación
         theme_color: "#000000", // Color para la barra de estado del navegador/tema del sistema
         background_color: "#ffffff", // Color de fondo de la pantalla de bienvenida
