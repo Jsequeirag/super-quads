@@ -582,7 +582,7 @@ export default function HeroSection() {
                           {adventure.title}
                         </h3>
                         <p
-                          className="text-gray-600 text-sm mt-1"
+                          className="text-gray-600 text-sm mt-1 truncate"
                           style={{
                             opacity: isSelected
                               ? 1
