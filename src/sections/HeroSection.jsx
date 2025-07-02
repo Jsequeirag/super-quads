@@ -25,6 +25,13 @@ export default function HeroSection() {
   );
 
   useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    // Forzar scroll al top
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     const timer = setTimeout(() => {
       setHeroContentLoaded(true);
     }, 100);
@@ -177,17 +184,29 @@ export default function HeroSection() {
       const deltaY = clientY - startY;
 
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        setDraggedDistance(deltaX);
+        // Aplicar límites solo en desktop (1024px o más)
+        let limitedDeltaX = deltaX;
+        if (windowWidth >= 1024) {
+          // Límite máximo de drag en desktop
+          const maxDragDistance = 200; // Ajusta este valor según necesites
+          limitedDeltaX = Math.max(
+            Math.min(deltaX, maxDragDistance),
+            -maxDragDistance
+          );
+        }
+
+        setDraggedDistance(limitedDeltaX);
 
         const dragSensitivity = 0.3;
         const rotationIncrement = anglePerCard / 100;
-        const newDragRotation = deltaX * rotationIncrement * dragSensitivity;
+        const newDragRotation =
+          limitedDeltaX * rotationIncrement * dragSensitivity;
         setDragRotation(newDragRotation);
 
         e.preventDefault();
       }
     },
-    [isDragging, dragStarted, startX, startY, anglePerCard]
+    [isDragging, dragStarted, startX, startY, anglePerCard, windowWidth]
   );
 
   const handleDragEnd = useCallback(() => {
